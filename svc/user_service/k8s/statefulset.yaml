@@ -35,15 +35,45 @@ spec:
         volumeMounts:
         - name: user-db
           mountPath: /data/user-db
-  volumeClaimTemplates:
-  - metadata:
-      name: user-db
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      #storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi
+      volumes:
+        - name: user-db
+          persistentVolumeClaim:
+            claimName: user-db-pvc
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: user-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: manual
+  selector:
+    matchLabels:
+      svc: user
+      app: postgres
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: user-db-pv
+  labels:
+    svc: user
+    app: postgres
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /mnt/storage/userdb/data
 ---
 apiVersion: v1
 kind: Service
