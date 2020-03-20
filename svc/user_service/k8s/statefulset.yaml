@@ -41,10 +41,10 @@ spec:
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: manual
-        selector:
-          matchLabels:
-            svc: user
-            app: postgres
+      selector:
+        matchLabels:
+          svc: user
+          app: postgres
       resources:
         requests:
           storage: 1Gi
