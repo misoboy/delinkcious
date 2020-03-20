@@ -37,7 +37,7 @@ spec:
           mountPath: /data/user-db
   volumeClaimTemplates:
   - metadata:
-      name: user-db-pvc
+      name: user-db
     spec:
       accessModes: [ "ReadWriteOnce" ]
       #storageClassName: manual
