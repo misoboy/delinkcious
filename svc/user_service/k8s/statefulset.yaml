@@ -38,6 +38,9 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: user-db
+      matchLabels:
+        svc: user
+        app: postgres
     spec:
       accessModes: [ "ReadWriteOnce" ]
       #storageClassName: manual
