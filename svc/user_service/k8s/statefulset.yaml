@@ -40,31 +40,10 @@ spec:
       name: user-db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: manual
-      selector:
-        matchLabels:
-          svc: user
-          app: postgres
+      storageClassName: "standard"
       resources:
         requests:
           storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: user-db-pv
-  labels:
-    svc: user
-    app: postgres
-spec:
-  capacity:
-    storage: 5Gi
-  volumeMode: Filesystem
-  accessModes: ["ReadWriteOnce"]
-  storageClassName: manual
-  persistentVolumeReclaimPolicy: Delete
-  hostPath:
-    path: /mnt/storage/userdb
 ---
 apiVersion: v1
 kind: Service
