@@ -40,7 +40,7 @@ spec:
       name: user-db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "nfs-prov"
+      storageClassName: "nfs-storageclass"
       resources:
         requests:
           storage: 1Gi
