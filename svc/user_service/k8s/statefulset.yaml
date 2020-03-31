@@ -40,13 +40,10 @@ spec:
       name: user-db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      #storageClassName: "nfs-storage"
+      storageClassName: "nfs-prov"
       resources:
         requests:
           storage: 1Gi
-      selector:
-        matchLabels:
-          name: nfs-pv
 ---
 apiVersion: v1
 kind: Service
